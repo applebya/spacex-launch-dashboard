@@ -1,10 +1,9 @@
 import { DeepReadonly } from 'ts-essentials';
-import { Action } from './actions';
-import { FilterType, ActionType } from './enums';
+import { FilterType, ActionType, Action, Launch } from './types';
 
 export type State = DeepReadonly<{
     isLoading: boolean;
-    results: Array<{}>;
+    launches: Launch[];
     filters: {
         [FilterType.LandSuccess]: boolean;
         [FilterType.Reused]: boolean;
@@ -14,7 +13,7 @@ export type State = DeepReadonly<{
 
 export const initialState: State = {
     isLoading: true,
-    results: [],
+    launches: [],
     filters: {
         [FilterType.LandSuccess]: false,
         [FilterType.Reused]: false,
@@ -25,7 +24,13 @@ export const initialState: State = {
 const reducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
         case ActionType.ToggleFilter:
-            return state;
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    [action.payload]: !state.filters[action.payload]
+                }
+            };
 
         case ActionType.RefreshResults:
             return {
@@ -36,7 +41,7 @@ const reducer = (state: State = initialState, action: Action): State => {
         case ActionType.SetResults:
             return {
                 ...state,
-                results: action.payload,
+                launches: action.payload,
                 isLoading: false
             };
 

@@ -1,7 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import MainApp from './App';
 import * as serviceWorker from './serviceWorker';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { normalize } from 'styled-normalize';
+import theme, { ThemeType } from './theme';
+
+// Style overrides
+const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
+    ${normalize}
+
+    body {
+        background: #000;
+        color: ${p => p.theme.color.textBody};
+    }
+`;
+
+const App = () => (
+    <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <MainApp />
+    </ThemeProvider>
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

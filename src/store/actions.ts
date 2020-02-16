@@ -1,38 +1,16 @@
-import { FilterType, ActionType } from './enums';
-
-// Basic action shape
-export type Action = {
-    type: ActionType;
-    payload?: any;
-};
-
-export type Dispatch = React.Dispatch<Action>;
-
-// Action Types
-type ToggleFilterAction = Action & {
-    type: ActionType.ToggleFilter;
-    payload: FilterType;
-};
-
-type RefreshResultsAction = Action & {
-    type: ActionType.RefreshResults;
-};
-
-type SetResultsAction = Action & {
-    type: ActionType.SetResults;
-};
+import { FilterType, ActionType, Action, Launch } from './types';
 
 // Action Creators
-export const toggleFilter = (payload: FilterType): ToggleFilterAction => ({
+export const toggleFilter = (filterType: FilterType): Action => ({
     type: ActionType.ToggleFilter,
-    payload
+    payload: { id: filterType }
 });
 
-export const refreshResults = (): RefreshResultsAction => ({
+export const refreshResults = (): Action => ({
     type: ActionType.RefreshResults
 });
 
-export const setResults = (payload: any[]): SetResultsAction => ({
+export const setResults = (results: Launch[]): Action => ({
     type: ActionType.SetResults,
-    payload
+    payload: { data: results }
 });
