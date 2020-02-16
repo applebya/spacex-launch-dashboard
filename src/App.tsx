@@ -1,13 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useReducer, useEffect } from 'react';
+import reducer, { initialState } from './store/reducer';
+import fetchResults from './services/fetchResults';
+
 import { hot } from 'react-hot-loader/root';
-import './App.css';
 
 function App() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        if (state.isLoading) {
+            fetchResults(dispatch);
+        }
+    }, [state.isLoading]);
+
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Edit <code>src/App.tsx</code> and save to reload.
                 </p>
