@@ -36,7 +36,8 @@ const reducer = (state: State = initialState, action: Action): State => {
         case ActionType.SetResults:
             return {
                 ...state,
-                results: action.payload
+                results: action.payload,
+                isLoading: false
             };
 
         default:

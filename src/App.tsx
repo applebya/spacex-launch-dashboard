@@ -1,8 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
+import { hot } from 'react-hot-loader/root';
 import reducer, { initialState } from './store/reducer';
 import fetchResults from './services/fetchResults';
-
-import { hot } from 'react-hot-loader/root';
 
 function App() {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,8 +13,8 @@ function App() {
     }, [state.isLoading]);
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div>
+            <header>
                 <p>
                     Edit <code>src/App.tsx</code> and save to reload.
                 </p>
