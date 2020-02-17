@@ -1,5 +1,5 @@
 import { FilterType, ActionType, Action } from './types';
-import { Launches } from './';
+import { Launches } from './reducer';
 
 // Action Creators
 export const toggleFilter = (filterType: FilterType): Action => ({

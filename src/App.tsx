@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 
-import reducer, { initialState } from './reducer';
+import reducer, { initialState } from './reducer/reducer';
 import fetchResults from './services/fetchResults';
 import FiltersMenu from './components/FiltersMenu';
 import LaunchesTable from './components/LaunchesTable';
@@ -16,36 +16,40 @@ const H1 = styled.h1`
     margin-top: 60px;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
     margin: 0px auto;
     padding: 0 2px;
     width: 960px;
+    margin-top: 0;
 `;
 
 function App() {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [
+        { isLoading, isInitialLoad, filters, launches },
+        dispatch
+    ] = useReducer(reducer, initialState);
 
     // Fetch results whenever isLoading has been changed to true
     useEffect(() => {
-        if (state.isLoading) {
+        if (isLoading) {
             fetchResults(dispatch);
         }
-    }, [state.isLoading]);
+    }, [isLoading]);
 
     return (
-        <Wrapper>
+        <Wrapper isInitialLoad={isInitialLoad}>
             <H1>SpaceX Launches</H1>
 
             <FiltersMenu
-                isLoading={state.isLoading}
-                filters={state.filters}
+                isLoading={isLoading}
+                isInitialLoad={isInitialLoad}
+                filters={filters}
                 dispatch={dispatch}
             />
 
-            <LaunchesTable
-                isLoading={state.isLoading}
-                launches={state.launches}
-            />
+            {!isInitialLoad && (
+                <LaunchesTable isLoading={isLoading} launches={launches} />
+            )}
         </Wrapper>
     );
 }

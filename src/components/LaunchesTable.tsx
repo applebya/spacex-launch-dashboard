@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
-import { Launches } from '../reducer';
+import { Launches } from '../reducer/reducer';
 import { ReactComponent as LinkIcon } from '../images/link.svg';
 import placeholderPath from '../images/placeholder.png';
 

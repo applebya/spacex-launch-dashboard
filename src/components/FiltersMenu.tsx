@@ -1,24 +1,30 @@
 import React from 'react';
-import { Filters, Dispatch, FilterType } from '../reducer';
 import styled, { keyframes, css } from 'styled-components';
+import {
+    Filters,
+    Dispatch,
+    FilterType,
+    refreshLaunches,
+    toggleFilter
+} from '../reducer';
 import Filter from './Filter';
 import { ReactComponent as RefreshIcon } from '../images/refresh.svg';
-import { refreshLaunches, toggleFilter } from '../reducer/actions';
 
 interface Props {
     isLoading: boolean;
+    isInitialLoad: boolean;
     filters: Filters;
     dispatch: Dispatch;
 }
 
-const Wrapper = styled(({ isLoading, ...props }) => <div {...props} />)`
+const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
     border: 1px solid ${p => p.theme.color.white};
     border-top-left-radius: ${p => p.theme.borderRadius};
     border-top-right-radius: ${p => p.theme.borderRadius};
     border-bottom-width: 0;
 
     ${p =>
-        p.isLoading &&
+        p.isInitialLoad &&
         `
             border-bottom-left-radius: ${p.theme.borderRadius};
             border-bottom-right-radius: ${p.theme.borderRadius};
@@ -86,10 +92,11 @@ const RefreshButton = styled.button.attrs({
 
 const FiltersMenu: React.FC<Props> = ({
     isLoading,
+    isInitialLoad,
     dispatch,
     filters: { landSuccess, reused, withReddit }
 }) => (
-    <Wrapper isLoading={isLoading}>
+    <Wrapper isInitialLoad={isInitialLoad}>
         <section>
             <RefreshButton
                 disabled={isLoading}

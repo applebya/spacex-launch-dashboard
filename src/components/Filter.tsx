@@ -22,7 +22,9 @@ const Checkbox = styled.span`
     }
 `;
 
-const Wrapper = styled.span`
+const FilterButton = styled.button.attrs({ type: 'button' })`
+    background: none;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,11 +45,10 @@ const Wrapper = styled.span`
 `;
 
 const Filter: React.FC<Props> = ({ isChecked, onClick, children }) => (
-    <Wrapper onClick={onClick}>
+    <FilterButton onClick={onClick}>
         <Checkbox>{isChecked && <CheckmarkIcon />}</Checkbox>
-        <input type="hidden" checked={isChecked} />
         {children}
-    </Wrapper>
+    </FilterButton>
 );
 
 export default Filter;
