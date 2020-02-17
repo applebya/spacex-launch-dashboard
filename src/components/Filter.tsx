@@ -33,7 +33,6 @@ const FilterButton = styled.button.attrs({ type: 'button' })`
     align-items: center;
     margin-left: 16px;
     color: ${p => p.theme.color.white};
-    font-family: ${p => p.theme.fontFamily.geomanist};
     font-size: ${p => p.theme.fontSize.sm};
     text-transform: uppercase !important;
     cursor: pointer;

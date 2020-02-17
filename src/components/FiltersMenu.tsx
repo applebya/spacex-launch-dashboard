@@ -36,7 +36,6 @@ const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: ${p => p.theme.fontFamily.geomanist};
 
     section {
         display: flex;
@@ -47,7 +46,6 @@ const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
         }
 
         color: ${p => p.theme.color.white};
-        font-family: ${p => p.theme.fontFamily.geomanist};
         text-transform: uppercase;
     }
 `;

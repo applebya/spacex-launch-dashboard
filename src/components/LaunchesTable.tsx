@@ -147,7 +147,6 @@ const NoLaunches = styled.div`
 
 const LaunchesTable: React.FC<Props> = ({ isLoading, launches }) => (
     <Wrapper>
-        {console.log(launches)}
         {launches.length > 0 ? (
             <Table isLoading={isLoading}>
                 <thead>

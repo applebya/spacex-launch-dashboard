@@ -15,10 +15,6 @@ const theme = {
         lg: '17px',
         xl: '64px'
     },
-    fontFamily: {
-        geomanist: 'Geomanist-Regular, sans-serif',
-        helvetica: 'Helvetica, sans-serif'
-    },
     borderRadius: '8px'
 };
 
