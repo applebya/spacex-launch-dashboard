@@ -47,7 +47,7 @@ const FilterButton = styled.button.attrs({ type: 'button' })`
 `;
 
 const Filter: React.FC<Props> = ({ isChecked, onClick, children }) => (
-    <FilterButton onClick={onClick}>
+    <FilterButton onClick={onClick} className="Filter">
         <Checkbox>{isChecked && <CheckmarkIcon />}</Checkbox>
         {children}
     </FilterButton>

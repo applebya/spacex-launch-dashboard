@@ -59,6 +59,7 @@ const rotateAnimation = keyframes`
 `;
 
 const RefreshButton = styled.button.attrs({
+    id: 'RefreshButton',
     type: 'button',
     title: 'Refresh Launches'
 })`
