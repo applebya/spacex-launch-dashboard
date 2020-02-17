@@ -18,6 +18,9 @@ const Checkbox = styled.span`
     align-items: center;
 
     svg {
+        width: 17px;
+        height: auto;
+        margin-top: 4px;
         fill: ${p => p.theme.color.lightBlue};
     }
 `;

@@ -20,7 +20,8 @@ export type Launch = {
 export enum ActionType {
     ToggleFilter = 'TOGGLE_FILTER',
     RefreshLaunches = 'REFRESH_LAUNCHES',
-    SetLaunches = 'SET_LAUNCHES'
+    SetLaunches = 'SET_LAUNCHES',
+    SetFetchError = 'SET_FETCH_ERROR'
 }
 
 export enum FilterType {

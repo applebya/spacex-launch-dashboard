@@ -2,8 +2,8 @@ import React, { useReducer, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 
-import reducer, { initialState } from './reducer/reducer';
 import fetchResults from './services/fetchResults';
+import reducer, { initialState } from './reducer/reducer';
 import FiltersMenu from './components/FiltersMenu';
 import LaunchesTable from './components/LaunchesTable';
 
@@ -25,7 +25,7 @@ const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
 
 function App() {
     const [
-        { isLoading, isInitialLoad, filters, launches },
+        { isLoading, isInitialLoad, filters, launches, error },
         dispatch
     ] = useReducer(reducer, initialState);
 
@@ -34,7 +34,7 @@ function App() {
         if (isLoading) {
             fetchResults(dispatch);
         }
-    }, [isLoading]);
+    }, [dispatch, isLoading]);
 
     return (
         <Wrapper isInitialLoad={isInitialLoad}>
@@ -43,6 +43,7 @@ function App() {
             <FiltersMenu
                 isLoading={isLoading}
                 isInitialLoad={isInitialLoad}
+                error={error}
                 filters={filters}
                 dispatch={dispatch}
             />

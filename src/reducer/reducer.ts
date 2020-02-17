@@ -15,6 +15,7 @@ export type State = DeepReadonly<{
     isInitialLoad: boolean;
     launches: Launches;
     filters: Filters;
+    error: string | null;
 }>;
 
 // Our app is initially loading
@@ -22,6 +23,7 @@ export const initialState: State = {
     isLoading: true,
     isInitialLoad: true,
     launches: [],
+    error: null,
     filters: {
         [FilterType.LandSuccess]: false,
         [FilterType.Reused]: false,
@@ -36,14 +38,15 @@ const reducer = (state: State = initialState, action: Action): State => {
                 ...state,
                 filters: {
                     ...state.filters,
-                    [action.payload]: !state.filters[action.payload]
+                    [action.payload.id]: !state.filters[action.payload.id]
                 }
             };
 
         case ActionType.RefreshLaunches:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
 
         case ActionType.SetLaunches:
@@ -52,6 +55,13 @@ const reducer = (state: State = initialState, action: Action): State => {
                 launches: action.payload.data,
                 isLoading: false,
                 isInitialLoad: false
+            };
+
+        case ActionType.SetFetchError:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
             };
 
         default:

@@ -15,6 +15,7 @@ interface Props {
     isInitialLoad: boolean;
     filters: Filters;
     dispatch: Dispatch;
+    error: string | null;
 }
 
 const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
@@ -39,10 +40,15 @@ const Wrapper = styled(({ isInitialLoad, ...props }) => <div {...props} />)`
 
     section {
         display: flex;
+        align-items: center;
 
         :first-child {
             flex: 1;
         }
+
+        color: ${p => p.theme.color.white};
+        font-family: ${p => p.theme.fontFamily.geomanist};
+        text-transform: uppercase;
     }
 `;
 
@@ -69,6 +75,7 @@ const RefreshButton = styled.button.attrs({
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-right: 8px;
 
     svg {
         min-width: 22px;
@@ -90,11 +97,16 @@ const RefreshButton = styled.button.attrs({
     }
 `;
 
+const ErrorText = styled.span`
+    color: ${p => p.theme.color.error};
+`;
+
 const FiltersMenu: React.FC<Props> = ({
     isLoading,
     isInitialLoad,
     dispatch,
-    filters: { landSuccess, reused, withReddit }
+    filters: { landSuccess, reused, withReddit },
+    error
 }) => (
     <Wrapper isInitialLoad={isInitialLoad}>
         <section>
@@ -104,7 +116,8 @@ const FiltersMenu: React.FC<Props> = ({
             >
                 <RefreshIcon />
             </RefreshButton>
-            {isLoading && ' Loading...'}
+            {isLoading && 'Loading...'}
+            {error && <ErrorText>Error: {error}</ErrorText>}
         </section>
 
         <section>

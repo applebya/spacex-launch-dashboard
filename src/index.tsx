@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     body {
         background: url(${background}) no-repeat center center fixed;
         background-size: cover;
+        background-color: ${p => p.theme.color.black};
     }
 `;
 

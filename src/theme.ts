@@ -6,7 +6,8 @@ const theme = {
         lightBlue: '#13A2E8',
         darkBlue: '#043D67',
         darkGray: '#444',
-        highlight: '#9DB7CD'
+        highlight: '#9DB7CD',
+        error: '#ec4242'
     },
     fontSize: {
         sm: '14px',

@@ -11,6 +11,11 @@ export const refreshLaunches = (): Action => ({
     type: ActionType.RefreshLaunches
 });
 
+export const setFetchError = (error: string): Action => ({
+    type: ActionType.SetFetchError,
+    payload: error
+});
+
 export const setLaunches = (launches: Launches): Action => ({
     type: ActionType.SetLaunches,
     payload: { data: launches }
