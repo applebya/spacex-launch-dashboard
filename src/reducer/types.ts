@@ -8,10 +8,17 @@ export type Launch = {
         rocket_id: string;
         rocket_name: string;
         rocket_type: string;
+        first_stage: {
+            cores: Array<{
+                land_success: boolean;
+                reused: boolean;
+            }>;
+        };
     };
     links: {
         mission_patch_small: string;
         article_link: string;
+        reddit: string;
     };
     details: string | null;
 };

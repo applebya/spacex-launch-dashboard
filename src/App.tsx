@@ -2,10 +2,11 @@ import React, { useReducer, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 
-import fetchResults from './services/fetchResults';
 import reducer, { initialState } from './reducer/reducer';
 import FiltersMenu from './components/FiltersMenu';
 import LaunchesTable from './components/LaunchesTable';
+import fetchResults from './services/fetchResults';
+import filterLaunches from './utils/filterLaunches';
 
 const H1 = styled.h1`
     color: ${p => p.theme.color.white};
@@ -36,6 +37,8 @@ function App() {
         }
     }, [dispatch, isLoading]);
 
+    const filteredLaunches = filterLaunches(launches, filters);
+
     return (
         <Wrapper isInitialLoad={isInitialLoad}>
             <H1>SpaceX Launches</H1>
@@ -49,7 +52,10 @@ function App() {
             />
 
             {!isInitialLoad && (
-                <LaunchesTable isLoading={isLoading} launches={launches} />
+                <LaunchesTable
+                    isLoading={isLoading}
+                    launches={filteredLaunches}
+                />
             )}
         </Wrapper>
     );

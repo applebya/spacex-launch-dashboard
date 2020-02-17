@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
 
     @font-face {
         font-family: 'Geomanist-Regular';
-        src: local('Geomanist-Regular'), local('GeomanistRegular'),
+        src: local('Geomanist-Regular'), local('Geomanist-Regular'),
         url('./fonts/geomanist-regular-webfont.woff2') format('woff2'),
         url('./fonts/geomanist-regular-webfont.woff') format('woff');
         font-weight: 300;

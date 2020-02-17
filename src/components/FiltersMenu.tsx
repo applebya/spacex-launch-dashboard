@@ -75,7 +75,7 @@ const RefreshButton = styled.button.attrs({
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-right: 8px;
+    margin-right: 12px;
 
     svg {
         min-width: 22px;
@@ -116,7 +116,9 @@ const FiltersMenu: React.FC<Props> = ({
             >
                 <RefreshIcon />
             </RefreshButton>
-            {isLoading && 'Loading...'}
+
+            {isLoading && isInitialLoad && 'Loading...'}
+            {isLoading && !isInitialLoad && 'Refreshing...'}
             {error && <ErrorText>Error: {error}</ErrorText>}
         </section>
 

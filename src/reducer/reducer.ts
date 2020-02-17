@@ -69,4 +69,19 @@ const reducer = (state: State = initialState, action: Action): State => {
     }
 };
 
-export default reducer;
+// Log actions & state transitions for development use
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+export default (state: State = initialState, action: Action): State => {
+    if (isDevelopment) {
+        console.log('ACTION:', action);
+    }
+
+    const newState = reducer(state, action);
+
+    if (isDevelopment) {
+        console.log('NEW STATE:', newState);
+    }
+
+    return newState;
+};

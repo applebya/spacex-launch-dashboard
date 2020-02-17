@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { format } from 'date-fns';
 import { Launches } from '../reducer/reducer';
 import { ReactComponent as LinkIcon } from '../images/link.svg';
@@ -12,6 +12,14 @@ interface Props {
 
 const Wrapper = styled.div``;
 
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+`;
+
 const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
     cellSpacing: 0,
     cellPadding: 0
@@ -23,6 +31,7 @@ const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
 
     opacity: 1;
     transition: opacity 0.5s ease;
+    animation ${fadeIn} 1s ease;
 
     ${p =>
         p.isLoading &&
@@ -80,6 +89,7 @@ const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
                 border-top: 1px solid ${p => p.theme.color.white};
                 border-bottom: 1px solid ${p => p.theme.color.white};
                 background: ${p => p.theme.color.whiteLayer};
+                transition: background .2s ease;
                 height: 65px;
                 color: ${p => p.theme.color.darkGray};
                 font-size: ${p => p.theme.fontSize.md};
@@ -93,6 +103,10 @@ const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
                     border-top-right-radius: ${p => p.theme.borderRadius};
                     border-bottom-right-radius: ${p => p.theme.borderRadius};
                 }
+            }
+
+            :hover td {
+                background: ${p => p.theme.color.white};
             }
         }
     }
@@ -123,56 +137,68 @@ const ArticleLink = styled.a`
     }
 `;
 
+const NoLaunches = styled.div`
+    border: 1px solid ${p => p.theme.color.white};
+    border-top: 0;
+    padding: 15px;
+    text-align: center;
+    color: ${p => p.theme.color.white};
+`;
+
 const LaunchesTable: React.FC<Props> = ({ isLoading, launches }) => (
     <Wrapper>
         {console.log(launches)}
-        <Table isLoading={isLoading}>
-            <thead>
-                <tr>
-                    <td>Badge</td>
-                    <td>Rocket Name</td>
-                    <td>Rocket Type</td>
-                    <td>Launch Date</td>
-                    <td>Details</td>
-                    <td>ID</td>
-                    <td>Article</td>
-                </tr>
-            </thead>
-            <tbody>
-                {launches.map(launch => (
-                    <tr key={launch.flight_number}>
-                        <td>
-                            <BadgeImage
-                                alt={`Flight ${launch.flight_number} Mission Patch`}
-                                src={
-                                    launch.links.mission_patch_small ||
-                                    placeholderPath
-                                }
-                            />
-                        </td>
-                        <td>{launch.rocket.rocket_name}</td>
-                        <td>{launch.rocket.rocket_type}</td>
-                        <td>
-                            {format(
-                                new Date(launch.launch_date_local),
-                                'yyyy-MM-dd'
-                            )}
-                        </td>
-                        <td>{launch.details}</td>
-                        <td>{launch.mission_id.join(' ') || 'X'}</td>
-                        <td>
-                            <ArticleLink
-                                href={launch.links.article_link}
-                                target="_blank"
-                                title="View article in new window"
-                            >
-                                <LinkIcon />
-                            </ArticleLink>
-                        </td>
+        {launches.length > 0 ? (
+            <Table isLoading={isLoading}>
+                <thead>
+                    <tr>
+                        <td>Badge</td>
+                        <td>Rocket Name</td>
+                        <td>Rocket Type</td>
+                        <td>Launch Date</td>
+                        <td>Details</td>
+                        <td>ID</td>
+                        <td>Article</td>
                     </tr>
-                ))}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    {launches.map(launch => (
+                        <tr key={launch.flight_number}>
+                            <td>
+                                <BadgeImage
+                                    alt={`Flight ${launch.flight_number} Mission Patch`}
+                                    src={
+                                        launch.links.mission_patch_small ||
+                                        placeholderPath
+                                    }
+                                />
+                            </td>
+                            <td>{launch.rocket.rocket_name}</td>
+                            <td>{launch.rocket.rocket_type}</td>
+                            <td>
+                                {format(
+                                    new Date(launch.launch_date_local),
+                                    'yyyy-MM-dd'
+                                )}
+                            </td>
+                            <td>{launch.details || 'N/A'}</td>
+                            <td>{launch.mission_id.join(' ') || 'X'}</td>
+                            <td>
+                                <ArticleLink
+                                    href={launch.links.article_link}
+                                    target="_blank"
+                                    title="View article in new window"
+                                >
+                                    <LinkIcon />
+                                </ArticleLink>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        ) : (
+            <NoLaunches>No launches found!</NoLaunches>
+        )}
     </Wrapper>
 );
 
