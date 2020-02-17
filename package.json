@@ -1,6 +1,6 @@
 {
     "name": "spacex-launch-dashboard",
-    "homepage": "https://applebya.github.io/spacex",
+    "homepage": "https://applebya.github.io/spacex-launch-dashboard",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
