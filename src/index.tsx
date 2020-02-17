@@ -29,6 +29,19 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
         background-size: cover;
         background-color: ${p => p.theme.color.black};
     }
+
+    #particles-js {
+        position: fixed;
+        top: 0;
+        width: 100%;
+            height: 100%;
+            z-index: -1;
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    }
 `;
 
 const App = () => (

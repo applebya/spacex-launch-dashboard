@@ -31,7 +31,7 @@ const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
 
     opacity: 1;
     transition: opacity 0.5s ease;
-    animation ${fadeIn} 1s ease;
+    animation: ${fadeIn} 1s ease;
 
     ${p =>
         p.isLoading &&
@@ -89,7 +89,7 @@ const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
                 border-top: 1px solid ${p => p.theme.color.white};
                 border-bottom: 1px solid ${p => p.theme.color.white};
                 background: ${p => p.theme.color.whiteLayer};
-                transition: background .2s ease;
+                transition: background 0.2s ease;
                 height: 65px;
                 color: ${p => p.theme.color.darkGray};
                 font-size: ${p => p.theme.fontSize.md};
