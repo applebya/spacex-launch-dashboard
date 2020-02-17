@@ -1,11 +1,11 @@
-import { setResults } from '../store/actions';
-import { Dispatch } from '../store/types';
+import { Launches, Dispatch } from '../reducer';
+import { setLaunches } from '../reducer/actions';
 
 const fetchResults = async (dispatch: Dispatch) => {
     const request = await fetch('https://api.spacexdata.com/v3/launches');
-    const results = await request.json();
+    const data: Launches = await request.json();
 
-    dispatch(setResults(results));
+    dispatch(setLaunches(data));
 };
 
 export default fetchResults;

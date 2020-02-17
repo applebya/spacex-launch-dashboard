@@ -5,14 +5,29 @@ import * as serviceWorker from './serviceWorker';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { normalize } from 'styled-normalize';
 import theme, { ThemeType } from './theme';
+import background from './images/background.jpg';
 
 // Style overrides
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     ${normalize}
 
+    @font-face {
+        font-family: 'Geomanist-Regular', sans-serif;
+        src: local('Geomanist-Regular'), local('GeomanistRegular'),
+        url('./fonts/geomanist-regular-webfont.woff2') format('woff2'),
+        url('./fonts/geomanist-regular-webfont.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    * {
+        font-family: 'Geomanist-Regular', sans-serif;
+        color: ${p => p.theme.color.darkGray};
+    }
+
     body {
-        background: #000;
-        color: ${p => p.theme.color.textBody};
+        background: url(${background}) no-repeat center center fixed;
+        background-size: cover;
     }
 `;
 
