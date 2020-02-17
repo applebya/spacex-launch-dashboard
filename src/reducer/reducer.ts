@@ -34,11 +34,13 @@ export const initialState: State = {
 const reducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
         case ActionType.ToggleFilter:
+            const type = action.payload;
+
             return {
                 ...state,
                 filters: {
                     ...state.filters,
-                    [action.payload.id]: !state.filters[action.payload.id]
+                    [type]: !state.filters[type]
                 }
             };
 
@@ -52,7 +54,7 @@ const reducer = (state: State = initialState, action: Action): State => {
         case ActionType.SetLaunches:
             return {
                 ...state,
-                launches: action.payload.data,
+                launches: action.payload,
                 isLoading: false,
                 isInitialLoad: false
             };

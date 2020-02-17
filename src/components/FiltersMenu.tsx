@@ -117,8 +117,8 @@ const FiltersMenu: React.FC<Props> = ({
                 <RefreshIcon />
             </RefreshButton>
 
-            {isLoading && isInitialLoad && 'Loading...'}
-            {isLoading && !isInitialLoad && 'Refreshing...'}
+            {isLoading && isInitialLoad && 'Launching...'}
+            {isLoading && !isInitialLoad && 'Relaunching...'}
             {error && <ErrorText>Error: {error}</ErrorText>}
         </section>
 

@@ -4,7 +4,7 @@ import { Launches } from './reducer';
 // Action Creators
 export const toggleFilter = (filterType: FilterType): Action => ({
     type: ActionType.ToggleFilter,
-    payload: { id: filterType }
+    payload: filterType
 });
 
 export const refreshLaunches = (): Action => ({
@@ -18,5 +18,5 @@ export const setFetchError = (error: string): Action => ({
 
 export const setLaunches = (launches: Launches): Action => ({
     type: ActionType.SetLaunches,
-    payload: { data: launches }
+    payload: launches
 });
