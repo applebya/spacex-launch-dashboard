@@ -1,4 +1,29 @@
+![Image](https://www.favicon.cc/logo3d/928788.png)
+
+# SpaceX Launch Dashboard
+
+A front-end application made in React (hooks), Styled-Components, and Typescript.
+
+It fetches the latest launch data from the [SpaceX API](https://github.com/r-spacex/SpaceX-API), and arranges it for you on a simple table.
+
+Integration tests run with [Cypress.io](https://www.cypress.io/)
+
+View it live on Github Pages: https://www.applebya.com/spacex-launch-dashboard/
+
+(Note: This project was created as part of an interview coding challenge, with a limited scope)
+
+## Notes for Discussion
+
+-   The "WithReddit" filter type exist, but no column in the table to show any of reddit links.
+-   Launches have various stages, so the "Landed" and "Reused" filters may need to be refined
+-   It'd be helpful for the `<tbody />` itself to be internally scrollable, so the column headers always remain
+-   It'd be helpful for the table to be sortable
+-   Integration tests could mock the fetch response data, so filters could be more fully tested
+-   The provided Sketch file was outdated (missing an artboard), and frequently crashed Avocode/Zeplin
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Contributing
 
 ## Available Scripts
 
@@ -16,6 +41,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn run deploy`
+
+Builds the app, and deploys it to Github Pages
 
 ### `yarn build`
 
