@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { format } from 'date-fns';
 import { Launches } from '../reducer';
-import { ReactComponent as LinkSVG } from '../images/link.svg';
+import { ReactComponent as LinkIcon } from '../images/link.svg';
+import placeholderPath from '../images/placeholder.png';
 
 interface Props {
     isLoading: boolean;
@@ -15,11 +17,44 @@ const Table = styled.table.attrs({
     cellPadding: 0
 })`
     width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 21px;
+
+    thead tr,
+    tbody tr {
+        td {
+            padding: 0 9px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            max-width: 290px;
+            min-width: 0;
+
+            :first-child,
+            :last-child {
+                text-align: center;
+            }
+
+            :first-child {
+                max-width: 50px;
+                padding-left: 21px;
+            }
+
+            :last-child {
+                padding-right: 21px;
+            }
+        }
+    }
 
     thead {
         tr {
-            background-image: ${p =>
-                `linear-gradient(to top, ${p.theme.color.highlight} 0%, ${p.theme.color.highlight} 23%, ${p.theme.color.highlight} 100%)`};
+            background-color: ${p => p.theme.color.white};
+            background-image: ${p => `linear-gradient(
+                to top,
+                rgba(0,0,0,0) 0%,
+                rgba(0,0,0,0) 23%,
+                ${p.theme.color.highlight} 100%
+            )`};
         }
 
         td {
@@ -29,34 +64,32 @@ const Table = styled.table.attrs({
         }
     }
 
-    thead tr,
-    tbody tr {
-        td {
-            padding: 0 21px;
-
-            :first-child,
-            :last-child {
-                text-align: center;
-            }
-        }
-    }
-
     tbody {
         tr {
-            background: ${p => p.theme.color.whiteLayer};
-            border-radius: ${p => p.theme.borderRadius};
-
             td {
+                border-top: 1px solid ${p => p.theme.color.white};
+                border-bottom: 1px solid ${p => p.theme.color.white};
+                background: ${p => p.theme.color.whiteLayer};
                 height: 65px;
                 color: ${p => p.theme.color.darkGray};
                 font-size: ${p => p.theme.fontSize.md};
+
+                :first-child {
+                    border-top-left-radius: ${p => p.theme.borderRadius};
+                    border-bottom-left-radius: ${p => p.theme.borderRadius};
+                }
+
+                :last-child {
+                    border-top-right-radius: ${p => p.theme.borderRadius};
+                    border-bottom-right-radius: ${p => p.theme.borderRadius};
+                }
             }
         }
     }
 `;
 
 const BadgeImage = styled.img`
-    width: 40px;
+    width: 33px;
     height: auto;
 `;
 
@@ -68,7 +101,15 @@ const ArticleLink = styled.a`
     svg {
         width: 21px;
         height: 21px;
-        fill: ${p => p.theme.color.icon};
+
+        path {
+            fill: ${p => p.theme.color.lightBlue};
+            transition: fill 0.1s ease;
+        }
+    }
+
+    :hover svg path {
+        fill: ${p => p.theme.color.darkBlue};
     }
 `;
 
@@ -90,23 +131,33 @@ const LaunchesTable: React.FC<Props> = ({ isLoading, launches }) => (
             </thead>
             <tbody>
                 {launches.map(launch => (
-                    <tr key={launch.mission_id.join(' ')}>
+                    <tr key={launch.flight_number}>
                         <td>
                             <BadgeImage
-                                src={launch.links.mission_patch_small}
+                                alt={`Flight ${launch.flight_number} Mission Patch`}
+                                src={
+                                    launch.links.mission_patch_small ||
+                                    placeholderPath
+                                }
                             />
                         </td>
                         <td>{launch.rocket.rocket_name}</td>
                         <td>{launch.rocket.rocket_type}</td>
-                        <td>{launch.launch_date_local}</td>
+                        <td>
+                            {format(
+                                new Date(launch.launch_date_local),
+                                'yyyy-MM-dd'
+                            )}
+                        </td>
                         <td>{launch.details}</td>
-                        <td>{launch.mission_id.join(' ')}</td>
+                        <td>{launch.mission_id.join(' ') || 'X'}</td>
                         <td>
                             <ArticleLink
                                 href={launch.links.article_link}
                                 target="_blank"
+                                title="View article in new window"
                             >
-                                <LinkSVG />
+                                <LinkIcon />
                             </ArticleLink>
                         </td>
                     </tr>

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     ${normalize}
 
     @font-face {
-        font-family: 'Geomanist-Regular', sans-serif;
+        font-family: 'Geomanist-Regular';
         src: local('Geomanist-Regular'), local('GeomanistRegular'),
         url('./fonts/geomanist-regular-webfont.woff2') format('woff2'),
         url('./fonts/geomanist-regular-webfont.woff') format('woff');
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     }
 
     * {
-        font-family: 'Geomanist-Regular', sans-serif;
+        font-family: ${p => p.theme.fontFamily.helvetica};
         color: ${p => p.theme.color.darkGray};
     }
 

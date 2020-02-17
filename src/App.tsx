@@ -10,6 +10,7 @@ import LaunchesTable from './components/LaunchesTable';
 const H1 = styled.h1`
     color: ${p => p.theme.color.white};
     font-size: ${p => p.theme.fontSize.xl};
+    text-align: center;
     text-shadow: 0 2px 4px ${p => p.theme.color.black};
     font-weight: 400;
     margin-top: 60px;
