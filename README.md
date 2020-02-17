@@ -18,8 +18,9 @@ View it live on Github Pages: https://www.applebya.com/spacex-launch-dashboard/
 -   Launches have various stages, so the "Landed" and "Reused" filters may need to be refined
 -   It'd be helpful for the `<tbody />` itself to be internally scrollable, so the column headers always remain
 -   It'd be helpful for the table to be sortable
--   Integration tests could mock the fetch response data, so filters could be more fully tested
+-   Integration tests could mock the fetch response data, so filters would be more fully tested
 -   The provided Sketch file was outdated (missing an artboard), and frequently crashed Avocode/Zeplin
+-   As the number of launches grows (dystopian future of rockets!), this list would encounter some performance issues. Would use `react-virtualized` to solve this.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
