@@ -3,7 +3,6 @@ import { FilterType, ActionType, Action, Launch } from './types';
 
 export * from './types';
 
-// State shape
 export type Launches = DeepReadonly<Launch[]>;
 
 export type Filters = DeepReadonly<{
@@ -12,6 +11,7 @@ export type Filters = DeepReadonly<{
     [FilterType.WithReddit]: boolean;
 }>;
 
+// State shape
 export type State = DeepReadonly<{
     isLoading: boolean;
     launches: Launches;

@@ -36,7 +36,11 @@ function App() {
         <Wrapper>
             <H1>SpaceX Launches</H1>
 
-            <FiltersMenu dispatch={dispatch} filters={state.filters} />
+            <FiltersMenu
+                isLoading={state.isLoading}
+                filters={state.filters}
+                dispatch={dispatch}
+            />
 
             <LaunchesTable
                 isLoading={state.isLoading}

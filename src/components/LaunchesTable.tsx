@@ -11,14 +11,24 @@ interface Props {
 }
 
 const Wrapper = styled.div``;
-const Loading = styled.div``;
-const Table = styled.table.attrs({
+
+const Table = styled(({ isLoading, ...props }) => <table {...props} />).attrs({
     cellSpacing: 0,
     cellPadding: 0
 })`
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 21px;
+    margin-top: -21px;
+
+    opacity: 1;
+    transition: opacity 0.5s ease;
+
+    ${p =>
+        p.isLoading &&
+        `
+        opacity: 0.5;
+    `}
 
     thead tr,
     tbody tr {
@@ -116,8 +126,7 @@ const ArticleLink = styled.a`
 const LaunchesTable: React.FC<Props> = ({ isLoading, launches }) => (
     <Wrapper>
         {console.log(launches)}
-        {isLoading && <Loading>Loading...</Loading>}
-        <Table>
+        <Table isLoading={isLoading}>
             <thead>
                 <tr>
                     <td>Badge</td>
